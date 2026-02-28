@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Store System — Newsletter | Dílna</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: #f5f5f5;
+    font-family: 'Barlow', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .email-wrapper {
+    max-width: 640px;
+    margin: 0 auto;
+    background-color: #ffffff;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background-color: #ffffff;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 32px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-icon {
+    width: 200px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .logo-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+
+  .logo-store { color: #E30613; }
+  .logo-system { color: #707070; }
+
+  .elfa-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: #666666;
+    text-transform: uppercase;
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    background: #ffffff;
+    height: 420px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(227,6,19,0.08) 0%, transparent 50%),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 39px,
+        rgba(255,255,255,0.025) 39px,
+        rgba(255,255,255,0.025) 40px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 39px,
+        rgba(255,255,255,0.025) 39px,
+        rgba(255,255,255,0.025) 40px
+      );
+  }
+
+  .hero-accent-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #E30613;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 52px 40px 40px 48px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hero-label {
+    display: inline-block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #E30613;
+    text-transform: uppercase;
+    border: 1px solid #E30613;
+    padding: 4px 10px;
+    width: fit-content;
+    margin-bottom: 20px;
+  }
+
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 86px;
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    color: #000000;
+  }
+
+  .hero-title span {
+    color: #E30613;
+    display: block;
+  }
+
+  .hero-subtitle {
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #666666;
+    letter-spacing: 1px;
+    line-height: 1.6;
+    max-width: 340px;
+    margin-top: 20px;
+  }
+
+  .hero-bottom {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .hero-stat {
+    text-align: left;
+  }
+
+  .hero-stat-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: #000;
+    line-height: 1;
+  }
+
+  .hero-stat-label {
+    font-size: 11px;
+    color: #666666;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 40px;
+    background: #cccccc;
+  }
+
+  /* ── SECTION TITLE ── */
+  .section-intro {
+    background: #f8f8f8;
+    padding: 40px 32px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .section-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #E30613;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-heading {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: #000000;
+    text-transform: uppercase;
+    line-height: 1.1;
+    letter-spacing: 0.5px;
+  }
+
+  .section-heading em {
+    color: #666666;
+    font-style: normal;
+  }
+
+  .section-body {
+    font-size: 14px;
+    color: #666666;
+    line-height: 1.7;
+    margin-top: 14px;
+    font-weight: 300;
+  }
+
+  /* ── PRODUCT GRID ── */
+  .product-grid {
+    padding: 8px 16px 16px;
+    background: #ffffff;
+  }
+
+  .product-row {
+    display: table;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 8px;
+  }
+
+  .product-cell {
+    display: table-cell;
+    width: 50%;
+    vertical-align: top;
+  }
+
+  .product-card {
+    background: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .product-card:hover {
+    border-color: #E30613;
+  }
+
+  .product-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85) contrast(1.1);
+  }
+
+  .product-info {
+    padding: 18px 20px;
+  }
+
+  .product-category {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #E30613;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .product-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .product-desc {
+    font-size: 12px;
+    color: #666666;
+    line-height: 1.6;
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+
+  .product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 14px;
+  }
+
+  .product-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #000;
+  }
+
+  .product-price span {
+    font-size: 12px;
+    font-weight: 400;
+    color: #999999;
+    margin-left: 2px;
+  }
+
+  .btn-small {
+    background: #E30613;
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    text-decoration: none;
+    border: none;
+    display: inline-block;
+  }
+
+  /* ── FEATURE STRIP ── */
+  .feature-strip {
+    background: #E30613;
+    padding: 28px 32px;
+  }
+
+  .feature-strip-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #000;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .features-row {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .feature-item {
+    display: table-cell;
+    width: 33.33%;
+    padding-right: 24px;
+    vertical-align: top;
+  }
+
+  .feature-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: rgba(0,0,0,0.15);
+    line-height: 1;
+    margin-bottom: -4px;
+  }
+
+  .feature-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+  }
+
+  .feature-sub {
+    font-size: 11px;
+    color: rgba(0,0,0,0.55);
+    margin-top: 4px;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  /* ── FULL WIDTH PRODUCT ── */
+  .featured-product {
+    margin: 8px 16px;
+    background: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .featured-product-img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.6) contrast(1.1);
+  }
+
+  .featured-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
+  }
+
+  .featured-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #E30613;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .featured-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 38px;
+    font-weight: 900;
+    color: #000;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .featured-desc {
+    font-size: 13px;
+    color: #666666;
+    line-height: 1.6;
+    font-weight: 300;
+    margin-bottom: 20px;
+    max-width: 420px;
+  }
+
+  .btn-featured {
+    display: inline-block;
+    background: #E30613;
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    text-decoration: none;
+  }
+
+  /* ── PROCESS ── */
+  .process-section {
+    padding: 40px 32px;
+    background: #f8f8f8;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .process-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #999999;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .process-step {
+    display: table;
+    width: 100%;
+    padding: 16px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .process-step:last-child {
+    border-bottom: none;
+  }
+
+  .step-num {
+    display: table-cell;
+    width: 44px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #E30613;
+    letter-spacing: 2px;
+    vertical-align: middle;
+  }
+
+  .step-content {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .step-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .step-desc {
+    font-size: 12px;
+    color: #666666;
+    margin-top: 2px;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .step-arrow {
+    display: table-cell;
+    width: 30px;
+    text-align: right;
+    vertical-align: middle;
+    color: #666666;
+    font-size: 18px;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: #ffffff;
+    padding: 48px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: 'GARAGE+';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 120px;
+    font-weight: 900;
+    color: rgba(0,0,0,0.02);
+    text-transform: uppercase;
+    white-space: nowrap;
+    letter-spacing: -4px;
+    pointer-events: none;
+  }
+
+  .cta-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #999999;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .cta-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: #000;
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: -1px;
+    margin-bottom: 6px;
+  }
+
+  .cta-title span { color: #E30613; }
+
+  .cta-sub {
+    font-size: 13px;
+    color: #666666;
+    font-weight: 300;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  .btn-cta {
+    display: inline-block;
+    background: #E30613;
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 16px 40px;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-secondary {
+    display: inline-block;
+    border: 1px solid #cccccc;
+    color: #666666;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 15px 32px;
+    text-decoration: none;
+    margin-left: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    padding: 32px;
+  }
+
+  .footer-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .footer-tagline {
+    font-size: 11px;
+    color: #666666;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .footer-links {
+    margin-bottom: 24px;
+  }
+
+  .footer-links a {
+    font-size: 11px;
+    color: #999999;
+    text-decoration: none;
+    margin-right: 20px;
+    letter-spacing: 1px;
+  }
+
+  .footer-contact {
+    font-size: 12px;
+    color: #666666;
+    line-height: 1.8;
+  }
+
+  .footer-divider {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 24px 0;
+  }
+
+  .footer-legal {
+    font-size: 10px;
+    color: #999999;
+    line-height: 1.7;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-legal a {
+    color: #666666;
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="email-wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div class="logo-area">
+        <img class="logo-icon" src="imgs/storesystem_logo-removebg-preview.png" alt="Store System Logo" />
+      </div>
+      <img class="elfa-badge" src="imgs/Bez_nazvu-removebg-preview.png" alt="elfa creating space" />
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-accent-line"></div>
+    <div class="hero-content">
+      <div>
+        <div class="hero-label">Nová kolekce 2025</div>
+        <div class="hero-title">
+          Váš<br>
+          <span>ideální</span>
+          pracovní<br>prostor
+        </div>
+        <div class="hero-subtitle">
+          Švédská preciznost. Nekonečné možnosti.<br>
+          Dílna, která pracuje tak tvrdě jako vy.
+        </div>
+      </div>
+      <div class="hero-bottom">
+        <div class="hero-stat">
+          <div class="hero-stat-number">100%</div>
+          <div class="hero-stat-label">Modulární</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">30+</div>
+          <div class="hero-stat-label">Let elfa</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">CZ+SK</div>
+          <div class="hero-stat-label">Distribuce</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION INTRO -->
+  <div class="section-intro">
+    <div class="section-tag">Sekce Dílna</div>
+    <div class="section-heading">
+      Pořádek v dílně —<br>
+      <em>ne kompromis.</em>
+    </div>
+    <div class="section-body">
+      Systém elfa GARAGE+ byl navržen pro ty, kdo berou svoji dílnu vážně. Každý háček, každá police, každý zásuvkový kontejner — přesně tam kde ho potřebujete.
+    </div>
+  </div>
+
+  <!-- PRODUCT GRID -->
+  <div class="product-grid">
+    <table class="product-row" cellpadding="0" cellspacing="0">
+      <tr>
+        <td class="product-cell" style="padding-right: 4px;">
+          <div class="product-card">
+            <img class="product-img" src="imgs/garaz-realizace100.jpg" alt="Pracovní stůl" />
+            <div class="product-info">
+              <div class="product-category">Pracovní stoly</div>
+              <div class="product-name">Stůl s masivní deskou</div>
+              <div class="product-desc">Masivní bukové dřevo. Nastavitelná výška. Pohyblivé zásuvkové kontejnery.</div>
+              <div class="product-footer">
+                <div class="product-price">od 8 900 <span>Kč</span></div>
+                <a href="https://storesystem.cz" class="btn-small">Zobrazit</a>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td class="product-cell" style="padding-left: 4px;">
+          <div class="product-card">
+            <img class="product-img" src="imgs/garaz-realizace101.jpg" alt="Nástěnný panel" />
+            <div class="product-info">
+              <div class="product-category">Nástěnné panely</div>
+              <div class="product-name">Panel GARAGE+ perfo</div>
+              <div class="product-desc">Perforovaný ocelový panel. Háčky, konzole, koše — nekonečná kombinovatelnost.</div>
+              <div class="product-footer">
+                <div class="product-price">od 1 290 <span>Kč</span></div>
+                <a href="https://storesystem.cz" class="btn-small">Zobrazit</a>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- FEATURE STRIP -->
+  <div class="feature-strip">
+    <div class="feature-strip-title">Proč elfa GARAGE+</div>
+    <table class="features-row" cellpadding="0" cellspacing="0">
+      <tr>
+        <td class="feature-item">
+          <div class="feature-num">01</div>
+          <div class="feature-text">Švédská ocel</div>
+          <div class="feature-sub">Vysoká pevnost, odolnost vůči korozi</div>
+        </td>
+        <td class="feature-item">
+          <div class="feature-num">02</div>
+          <div class="feature-text">Bez šroubů do zdi</div>
+          <div class="feature-sub">Závěsný systém — snadná montáž i přestavba</div>
+        </td>
+        <td class="feature-item">
+          <div class="feature-num">03</div>
+          <div class="feature-text">Doživotní záruka</div>
+          <div class="feature-sub">Investice, která vydrží celý život</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- FEATURED PRODUCT -->
+  <div style="padding: 8px 16px 0;">
+    <div class="featured-product">
+      <img class="featured-product-img" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1200&q=80" alt="Kompletní řešení dílny" />
+      <div class="featured-overlay">
+        <div class="featured-label">Kompletní řešení</div>
+        <div class="featured-title">Dílna na míru<br>od A do Z</div>
+        <div class="featured-desc">Přijedeme, zaměříme a navrhneme 3D vizualizaci zdarma. Vy schválíte, my nainstalujeme.</div>
+        <a href="https://storesystem.cz" class="btn-featured">Chci konzultaci zdarma</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESS STEPS -->
+  <div class="process-section">
+    <div class="process-tag">Jak to funguje</div>
+
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <div class="step-title">Přijedeme & Zaměříme</div>
+        <div class="step-desc">Kontaktujete nás — přijedeme, zaměříme prostor, zjistíme vaše potřeby.</div>
+      </div>
+      <div class="step-arrow">&#8594;</div>
+    </div>
+
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <div class="step-title">3D Vizualizace & Kalkulace</div>
+        <div class="step-desc">Zpracujeme 3D návrh a detailní cenovou kalkulaci přesně pro váš prostor.</div>
+      </div>
+      <div class="step-arrow">&#8594;</div>
+    </div>
+
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <div class="step-title">Schválení & Instalace</div>
+        <div class="step-desc">Doladíme detaily, domluvíme termín a profesionálně vše nainstalujeme.</div>
+      </div>
+      <div class="step-arrow">&#8594;</div>
+    </div>
+  </div>
+
+  <!-- CTA SECTION -->
+  <div class="cta-section">
+    <div class="cta-tag">Limitovaná nabídka — jaro 2025</div>
+    <div class="cta-title">Vytvořte si<br><span>dílnu snů.</span></div>
+    <div class="cta-sub">Konzultace i 3D vizualizace zdarma. Platí do 31. 3. 2025.</div>
+    <div>
+      <a href="https://storesystem.cz" class="btn-cta">Začít plánovat</a>
+      <a href="https://storesystem.cz/e-shop" class="btn-secondary">E-shop</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">
+      <span class="logo-store">STORE</span>
+      <span class="logo-system"> SYSTEM</span>
+    </div>
+    <div class="footer-tagline">Výhradní distributor Elfa — CZ & SK</div>
+
+    <div class="footer-links">
+      <a href="https://storesystem.cz">Web</a>
+      <a href="https://storesystem.cz/e-shop">E-shop</a>
+      <a href="https://storesystem.cz/realizace">Realizace</a>
+      <a href="https://storesystem.cz/kontakt">Kontakt</a>
+    </div>
+
+    <div class="footer-contact">
+      <span style="color:#4D4D4D;">+420 777 793 359</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+      <span style="color:#4D4D4D;">info@storesystem.cz</span><br>
+      <span style="color:#2a2a2a;">Vídeňská 74, Vestec — Praha-západ</span>
+    </div>
+
+    <hr class="footer-divider">
+
+    <div class="footer-legal">
+      Tento e-mail obdržel/a jste jako registrovaný odběratel novinek Store System, s.r.o.<br>
+      <a href="#">Odhlásit odběr</a> &nbsp;|&nbsp; <a href="#">Ochrana osobních údajů</a> &nbsp;|&nbsp; IČ: 278 78 031
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
